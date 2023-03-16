@@ -16,6 +16,7 @@ public class Gravity : MonoBehaviour
     public Vector3 body2Acc = new Vector3(0f,0f,0f);
 
     public PlayerControls controls;
+    public float moveSpeed = 50f;
 
     public Vector3 pos_vec;
     public Vector3 F;
@@ -46,15 +47,20 @@ public class Gravity : MonoBehaviour
         //body1Vel += body1Acc * dt;
 
         if ((body2.GetComponent("PlayerControls") as PlayerControls) != null) {
+            PlayerControls controls = body2.GetComponent<PlayerControls>();
             if (controls.inputX != 0 || controls.inputY != 0) {
-                PlayerControls controls = body2.GetComponent<PlayerControls>();
-                body2Acc += Vector3.Normalize(controls.movement) * Vector3.Magnitude(body2Acc);
-                body2Vel = Vector3.Normalize(controls.movement) * Vector3.Magnitude(body2Vel);
+                body2Acc += Vector3.Normalize(controls.movement) * moveSpeed;
+                //body2Vel = Vector3.Normalize(controls.movement) * Vector3.Magnitude(body2Vel);
             }
         }
         body2Vel += body2Acc * dt;
         
         //body1.transform.position += body1Vel * dt;
         body2.transform.position += body2Vel * dt;
+    }
+
+    private void OnTriggerEnter(Collider other) { // Simulates normal force between colliding objects
+        body2Acc -= Vector3.Project(pos_vec, body2Acc);
+        body2Vel -= Vector3.Project(pos_vec, body2Vel);
     }
 }

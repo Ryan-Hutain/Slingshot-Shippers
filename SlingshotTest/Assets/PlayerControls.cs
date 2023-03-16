@@ -19,6 +19,6 @@ public class PlayerControls : MonoBehaviour
 
         movement *= Time.deltaTime;
 
-        transform.Translate(movement);
+        //transform.Translate(movement);
     }
 }
