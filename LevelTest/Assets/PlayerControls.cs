@@ -22,7 +22,7 @@ public class PlayerControls : MonoBehaviour
 
         rb = obj.GetComponent<Rigidbody>();
         if (inputX != 0 || inputY != 0) {
-            rb.AddForce(Vector3.Normalize(movement) * moveSpeed, ForceMode.Impulse);
+            rb.AddForce(Vector3.Normalize(movement) * moveSpeed, ForceMode.Acceleration);
         }
     }
 }
