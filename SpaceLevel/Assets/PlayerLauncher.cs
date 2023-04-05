@@ -14,8 +14,8 @@ public class PlayerLauncher : MonoBehaviour
     public Vector3 direction;
     public bool isAiming = false;
     public float arrowScaleFactor = 1.0f;
-    public float maxArrowDistance = 20f;
-    public float velocityScale = 0.001f;
+    public float maxArrowDistance = 40f;
+    public float velocityScale = 1f;
     public Rigidbody rb;
     private Vector3 mouseStartPosition;
 
@@ -62,7 +62,7 @@ public class PlayerLauncher : MonoBehaviour
                         Destroy(arrow);
                     }
 
-                    rb.AddForce(direction.normalized * (1e1f * velocity), ForceMode.Acceleration);
+                    rb.AddForce(direction.normalized * (1e2f * velocity), ForceMode.Acceleration);
                 }
             }
         }
