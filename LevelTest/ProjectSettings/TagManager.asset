@@ -11,6 +11,9 @@ TagManager:
   - Satellite
   - Misc
   - ObjManager
+  - Start
+  - End
+  - GameManager
   layers:
   - Default
   - TransparentFX

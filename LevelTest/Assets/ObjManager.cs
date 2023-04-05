@@ -9,7 +9,7 @@ public class ObjManager : MonoBehaviour
     public List<GameObject> planets = new List<GameObject>();
     public List<GameObject> satellites = new List<GameObject>();
     public List<GameObject> miscs = new List<GameObject>();
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +61,10 @@ public class ObjManager : MonoBehaviour
             {
                 miscs.Add(obj);
             }
+        }
+        if (!miscs.Contains(GameObject.FindGameObjectWithTag("Player")))
+        {
+            miscs.Add(GameObject.FindGameObjectWithTag("Player"));
         }
     }
 }

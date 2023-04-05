@@ -4,38 +4,71 @@ using UnityEngine;
 
 public class PlayerLauncher : MonoBehaviour
 {
-    public float velocityScale = 0.001f; // Scale the velocity by this amount
+    public GameManager status;
+    public GameObject cannon;
+    public GameObject arrowPrefab;
+    public GameObject arrow;
+
+    public Vector3 mousePosition;
+    public Vector3 worldPosition;
+    public Vector3 direction;
+    public bool isAiming = false;
+    public float arrowScaleFactor = 1.0f;
+    public float maxArrowDistance = 20f;
+    public float velocityScale = 0.001f;
     public Rigidbody rb;
-    public bool hasStarted = false;
-    private bool isDragging = false;
     private Vector3 mouseStartPosition;
 
     // Start is called before the first frame update
     void Start()
     {
+        status = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        isDragging = false;
-        isDragging = DragDetector();
-        if (!isDragging && !hasStarted && Input.GetMouseButtonDown(0)) {
-            hasStarted = true;
-            Vector3 mousePosition = Input.mousePosition;
-            mousePosition.z = 0;
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            worldPosition.z = 0;
-            Vector3 direction = worldPosition - transform.position;
-            if (Vector3.Magnitude(direction) > 20) {
-                direction = Vector3.Normalize(direction) * 20;
+        mousePosition = Input.mousePosition;
+        mousePosition.z = 0;
+        worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        worldPosition.z = 0;
+        direction = worldPosition - transform.position;
+        if (Vector3.Magnitude(direction) > maxArrowDistance) {
+            direction = Vector3.Normalize(direction) * maxArrowDistance;
+        }
+        float velocity = direction.magnitude * velocityScale;
+
+        if (status.isRunning == true) {
+            if (isAiming) {
+                float length = GetComponent<Renderer>().bounds.size.magnitude;
+                arrow.transform.position = GetComponent<Renderer>().bounds.center + (Vector3.Normalize(direction) * (length / 4) * arrowScaleFactor * velocity);
+                arrow.transform.right = direction;
+
+                float distance = Mathf.Min(velocity, maxArrowDistance);
+                arrow.transform.localScale = new Vector3(distance * arrowScaleFactor, 1f, 1f);
             }
-            float velocity = direction.magnitude * velocityScale;
-            rb.velocity = direction.normalized * velocity;
+
+            if (Input.GetMouseButtonDown(0)) {
+                if (!isAiming) {
+                    isAiming = true;
+
+                    arrow = Instantiate(arrowPrefab, cannon.transform.position, Quaternion.identity);
+                } else {
+                    // Player clicks again to launch the object
+                    isAiming = false;
+
+                    if (GameObject.Find("Arrow(Clone)") != null) {
+                        Destroy(arrow);
+                    }
+
+                    rb.velocity = direction.normalized * velocity;
+                }
+            }
         }
     }
 
+    /*
     private bool DragDetector() {
         if (Input.GetMouseButtonDown(0)) {
             mouseStartPosition = Input.mousePosition;
@@ -49,4 +82,5 @@ public class PlayerLauncher : MonoBehaviour
         }
         return false;
     }
+    */
 }

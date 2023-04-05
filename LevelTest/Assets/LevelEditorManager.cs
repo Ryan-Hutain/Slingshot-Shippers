@@ -18,11 +18,6 @@ public class LevelEditorManager : MonoBehaviour
             ItemButtons[CurrentButtonPressed].Clicked = false;
             GameObject newObj = Instantiate(ItemPrefabs[CurrentButtonPressed], new Vector3(worldPosition.x, worldPosition.y, 0), Quaternion.identity);
             newObj.tag = "Node";
-
-            Rigidbody rb = newObj.AddComponent<Rigidbody>();
-            rb.isKinematic = true;
-            rb.mass = 1e15f;
-            rb.velocity = new Vector3(0f,0f,0f);
         }
     }
 }
