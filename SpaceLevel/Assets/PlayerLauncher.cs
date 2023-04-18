@@ -13,6 +13,7 @@ public class PlayerLauncher : MonoBehaviour
     public Vector3 worldPosition;
     public Vector3 direction;
     public bool isAiming = false;
+    public bool hasLaunched = false;
     public float arrowScaleFactor = 1.0f;
     public float maxArrowDistance = 40f;
     public float velocityScale = 1f;
@@ -40,7 +41,7 @@ public class PlayerLauncher : MonoBehaviour
         float velocity = direction.magnitude * velocityScale;
 
         if (status.isRunning == true) {
-            if (isAiming) {
+            if (isAiming && !hasLaunched) {
                 float length = GetComponent<Renderer>().bounds.size.magnitude;
                 arrow.transform.position = GetComponent<Renderer>().bounds.center + (Vector3.Normalize(direction) * (length / 4) * arrowScaleFactor * velocity);
                 arrow.transform.right = direction;
@@ -57,6 +58,7 @@ public class PlayerLauncher : MonoBehaviour
                 } else {
                     // Player clicks again to launch the object
                     isAiming = false;
+                    hasLaunched = true;
 
                     if (GameObject.Find("Arrow(Clone)") != null) {
                         Destroy(arrow);

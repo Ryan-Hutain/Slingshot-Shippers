@@ -14,6 +14,10 @@ public class TimeManip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown("space")) {
+            Time.timeScale = timeScale * 2;
+        } else {
+            Time.timeScale = timeScale;
+        }
     }
 }
