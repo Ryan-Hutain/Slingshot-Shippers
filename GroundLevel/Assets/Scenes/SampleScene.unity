@@ -1597,7 +1597,7 @@ MonoBehaviour:
   grav_rad: 0
   F: {x: 0, y: 0, z: 0}
   v_circle: 0
-  G: 6.67e-11
+  G: 0.00000000667
 --- !u!4 &826604888
 Transform:
   m_ObjectHideFlags: 0
@@ -2123,12 +2123,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795572077}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c08c4976247635438548fd84860a79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeScale: 1
+  timeAccel: 10
 --- !u!4 &1795572079
 Transform:
   m_ObjectHideFlags: 0
@@ -2369,6 +2370,14 @@ PrefabInstance:
       propertyPath: fuelText
       value: 
       objectReference: {fileID: 296409724}
+    - target: {fileID: 4304943308613223336, guid: 10e8687ecf3254f4f9ec4c4e2459dabf, type: 3}
+      propertyPath: fuelLevel
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304943308613223336, guid: 10e8687ecf3254f4f9ec4c4e2459dabf, type: 3}
+      propertyPath: moveSpeed
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 4304943308613223338, guid: 10e8687ecf3254f4f9ec4c4e2459dabf, type: 3}
       propertyPath: mass
       value: 1
@@ -2437,5 +2446,17 @@ PrefabInstance:
       propertyPath: cannon
       value: 
       objectReference: {fileID: 133791697}
+    - target: {fileID: 4304943308613223351, guid: 10e8687ecf3254f4f9ec4c4e2459dabf, type: 3}
+      propertyPath: velocityScale
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304943308613223351, guid: 10e8687ecf3254f4f9ec4c4e2459dabf, type: 3}
+      propertyPath: arrowScaleFactor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304943308613223351, guid: 10e8687ecf3254f4f9ec4c4e2459dabf, type: 3}
+      propertyPath: maxArrowDistance
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10e8687ecf3254f4f9ec4c4e2459dabf, type: 3}

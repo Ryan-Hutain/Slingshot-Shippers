@@ -14,9 +14,9 @@ public class PlayerLauncher : MonoBehaviour
     public Vector3 direction;
     public bool isAiming = false;
     public bool hasLaunched = false;
-    public float arrowScaleFactor = 1.0f;
-    public float maxArrowDistance = 20f;
-    public float velocityScale = 1e19f;
+    public float arrowScaleFactor = 0.1f;
+    public float maxArrowDistance = 100f;
+    public float velocityScale = 1e10f;
     public Rigidbody rb;
     private Vector3 mouseStartPosition;
 
@@ -43,7 +43,7 @@ public class PlayerLauncher : MonoBehaviour
         if (status.isRunning == true) {
             if (isAiming && !hasLaunched) {
                 float length = GetComponent<Renderer>().bounds.size.magnitude;
-                arrow.transform.position = GetComponent<Renderer>().bounds.center + (Vector3.Normalize(direction) * (length / 4) * arrowScaleFactor * velocity);
+                arrow.transform.position = GetComponent<Renderer>().bounds.center + (Vector3.Normalize(direction) * (length + arrowScaleFactor / 2));
                 arrow.transform.right = direction;
 
                 float distance = Mathf.Min(velocity, maxArrowDistance);
