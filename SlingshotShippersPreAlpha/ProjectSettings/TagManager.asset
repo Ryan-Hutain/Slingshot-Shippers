@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Satellite
+  - Misc
+  - ObjManager
+  - Start
+  - GameManager
+  - End
+  - LevelEditorManager
+  - Node
+  - Planet
+  - Asteroid
   layers:
   - Default
   - TransparentFX

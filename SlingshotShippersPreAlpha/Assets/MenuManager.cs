@@ -28,7 +28,8 @@ public class MenuManager : MonoBehaviour
     }
 
     public void QuitGame() {
-        UnityEditor.EditorApplication.isPlaying = false;
+        PlayerPrefs.SetInt("GameStarted", 0);
         Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }
