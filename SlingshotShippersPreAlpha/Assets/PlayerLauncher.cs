@@ -50,7 +50,7 @@ public class PlayerLauncher : MonoBehaviour
                 arrow.transform.localScale = new Vector3(distance * arrowScaleFactor, 10f, 1f);
             }
 
-            if (Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButtonDown(0) && !hasLaunched) {
                 if (!isAiming) {
                     isAiming = true;
 
@@ -64,7 +64,7 @@ public class PlayerLauncher : MonoBehaviour
                         Destroy(arrow);
                     }
 
-                    rb.AddForce(direction.normalized * (1e2f * velocity), ForceMode.Acceleration);
+                    rb.AddForce(direction.normalized * (5e2f * velocity), ForceMode.Acceleration);
                 }
             }
         }

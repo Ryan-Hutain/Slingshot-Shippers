@@ -22,6 +22,11 @@ public class MenuManager : MonoBehaviour
         SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
+    public void LevelSettings() {
+        SceneManager.LoadSceneAsync((int)targetScene, LoadSceneMode.Additive);
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
     private void OnSceneUnloaded(Scene scene) {
         SceneManager.sceneUnloaded -= OnSceneUnloaded;
         SceneManager.LoadSceneAsync((int)targetScene, LoadSceneMode.Single);

@@ -17,13 +17,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Settings.unity
     guid: 027bef803364d0f43be067ae515eed91
+  - enabled: 0
+    path: Assets/Scenes/PauseMenu.unity
+    guid: 5818e4f30000a874898fd6460cb025ed
   - enabled: 1
     path: Assets/Tutorial.unity
     guid: 5b2ad5e0d2625c5429f4babae603b2b4
   - enabled: 1
-    path: Assets/Level1.unity
+    path: Assets/Scenes/Level1.unity
     guid: 236f6fc2cb11dab4b96e547fb9207432
   - enabled: 1
-    path: Assets/Level2.unity
+    path: Assets/Scenes/Level2.unity
     guid: 8007d4a193482e94da1d1dfe4055f277
   m_configObjects: {}

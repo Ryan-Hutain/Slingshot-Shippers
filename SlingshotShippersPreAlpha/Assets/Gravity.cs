@@ -6,6 +6,7 @@ public class Gravity : MonoBehaviour
 {
     public GameObject ObjManager;
     public ObjManager objList;
+    public GameManager status;
 
     public Rigidbody rb1;
     public Vector3 body1Pos;
@@ -29,6 +30,7 @@ public class Gravity : MonoBehaviour
     void Start()
     {
         objList = GameObject.FindGameObjectWithTag("ObjManager").GetComponent<ObjManager>();
+        status = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -73,41 +75,43 @@ public class Gravity : MonoBehaviour
     }
 
     public void GravCalc(GameObject body1, GameObject body2, bool circleOrbit) {
-        rb1 = body1.GetComponent<Rigidbody>();
-        rb2 = body2.GetComponent<Rigidbody>();
+        if (status.isRunning) {
+            rb1 = body1.GetComponent<Rigidbody>();
+            rb2 = body2.GetComponent<Rigidbody>();
 
-        switch (body1.tag) {
-            case "Node":
-                grav_rad = 25;
-                break;
-            case "Asteroid":
-                grav_rad = 50;
-                break;
-            case "Planet":
-                grav_rad = 250;
-                break;
-            default:
-                grav_rad = 0;
-                break;
-        }
-
-        body1Pos = body1.transform.position;
-        body2Pos = body2.transform.position;
-        pos_vec = body1Pos - body2Pos;
-        r = Vector3.Magnitude(pos_vec);
-        
-        if (Vector3.Magnitude(pos_vec) <= grav_rad) {
-            if (circleOrbit && !hasCollided) {
-                Orbit(body2);
-            } else {
-                F = (G * rb1.mass * rb2.mass * Vector3.Normalize(pos_vec)) / (Mathf.Pow(r,2));
+            switch (body1.tag) {
+                case "Node":
+                    grav_rad = 25;
+                    break;
+                case "Asteroid":
+                    grav_rad = 50;
+                    break;
+                case "Planet":
+                    grav_rad = 250;
+                    break;
+                default:
+                    grav_rad = 0;
+                    break;
             }
-        } else {
-            F = new Vector3(0f,0f,0f);
-        }
 
-        rb1.AddForce(-F, ForceMode.Acceleration);
-        rb2.AddForce(F, ForceMode.Acceleration);
+            body1Pos = body1.transform.position;
+            body2Pos = body2.transform.position;
+            pos_vec = body1Pos - body2Pos;
+            r = Vector3.Magnitude(pos_vec);
+            
+            if (Vector3.Magnitude(pos_vec) <= grav_rad) {
+                if (circleOrbit && !hasCollided) {
+                    Orbit(body2);
+                } else {
+                    F = (G * rb1.mass * rb2.mass * Vector3.Normalize(pos_vec)) / (Mathf.Pow(r,2f));
+                }
+            } else {
+                F = new Vector3(0f,0f,0f);
+            }
+
+            rb1.AddForce(-F, ForceMode.Acceleration);
+            rb2.AddForce(F, ForceMode.Acceleration);
+        }
     }
 
     void OnCollisionEnter(Collision collision) {

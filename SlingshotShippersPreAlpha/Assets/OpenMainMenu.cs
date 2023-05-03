@@ -10,11 +10,16 @@ public class OpenMainMenu : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("GameStarted"))
         {
-            // Set the flag to indicate that the game has been started
+            // Set the "GameStarted" player preference to 1 to indicate that the game has been started
             PlayerPrefs.SetInt("GameStarted", 1);
 
             // Load the main menu scene
-            SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+            SceneManager.LoadScene("MainMenu");
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("MainMenu", 0);
     }
 }

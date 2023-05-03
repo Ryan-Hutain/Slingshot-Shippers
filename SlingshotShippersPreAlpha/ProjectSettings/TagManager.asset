@@ -14,6 +14,8 @@ TagManager:
   - Node
   - Planet
   - Asteroid
+  - Undefined
+  - Pause
   layers:
   - Default
   - TransparentFX
