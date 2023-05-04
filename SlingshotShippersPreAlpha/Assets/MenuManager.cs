@@ -39,7 +39,7 @@ public class MenuManager : MonoBehaviour
 
     public void NextLevel() {
         int currentLevel = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadSceneAsync(currentLevel++, LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync(currentLevel + 1, LoadSceneMode.Single);
     }
 
     public void QuitGame() {

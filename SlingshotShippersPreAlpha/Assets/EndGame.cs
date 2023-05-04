@@ -14,6 +14,7 @@ public class EndGame : MonoBehaviour
     {
         status = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         winScreen.SetActive(false);
+        loseScreen.SetActive(false);
     }
 
     void OnTriggerEnter(Collider other) {
