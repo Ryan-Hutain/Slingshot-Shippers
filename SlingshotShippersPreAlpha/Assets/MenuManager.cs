@@ -32,6 +32,16 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadSceneAsync((int)targetScene, LoadSceneMode.Single);
     }
 
+    public void Restart() {
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadSceneAsync(currentLevel, LoadSceneMode.Single);
+    }
+
+    public void NextLevel() {
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadSceneAsync(currentLevel++, LoadSceneMode.Single);
+    }
+
     public void QuitGame() {
         PlayerPrefs.SetInt("GameStarted", 0);
         Application.Quit();

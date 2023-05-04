@@ -29,6 +29,5 @@ public class TimeManip : MonoBehaviour
         } else {
             Time.timeScale = 0.0f;
         }
-        Debug.Log(isPaused);
     }
 }

@@ -27,7 +27,8 @@ public class CameraMove : MonoBehaviour
         targetPosition = transform.position;
         targetZoom = cam.orthographicSize;
 
-        Canvas canvas = FindObjectOfType<Canvas>();
+        //Canvas canvas = FindObjectOfType<Canvas>();
+        GameObject canvas = GameObject.Find("Canvas");
         canvasInitPos = canvas.GetComponent<RectTransform>().position;
         canvasH = canvas.GetComponent<RectTransform>().rect.height;
         canvasW = canvas.GetComponent<RectTransform>().rect.width;
