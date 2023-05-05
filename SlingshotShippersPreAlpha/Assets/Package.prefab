@@ -163,6 +163,7 @@ MonoBehaviour:
   worldPosition: {x: 0, y: 0, z: 0}
   direction: {x: 0, y: 0, z: 0}
   isAiming: 0
+  hasLaunched: 0
   arrowScaleFactor: 1
   maxArrowDistance: 20
   velocityScale: 1
