@@ -25,6 +25,7 @@ public class PlayerLauncher : MonoBehaviour
     {
         status = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezePosition;
     }
 
     // Update is called once per frame
@@ -45,6 +46,7 @@ public class PlayerLauncher : MonoBehaviour
                 float length = GetComponent<Renderer>().bounds.size.magnitude;
                 arrow.transform.position = GetComponent<Renderer>().bounds.center + (Vector3.Normalize(direction) * (length / 4) * arrowScaleFactor * velocity);
                 arrow.transform.right = direction;
+                transform.right = new Vector3(direction.x, direction.y, 0);
 
                 float distance = Mathf.Min(velocity, maxArrowDistance);
                 arrow.transform.localScale = new Vector3(distance * arrowScaleFactor, 10f, 1f);
@@ -63,7 +65,8 @@ public class PlayerLauncher : MonoBehaviour
                     if (GameObject.Find("Arrow(Clone)") != null) {
                         Destroy(arrow);
                     }
-
+                    
+                    rb.constraints = RigidbodyConstraints.None;
                     rb.AddForce(direction.normalized * (5e2f * velocity), ForceMode.Acceleration);
                 }
             }
