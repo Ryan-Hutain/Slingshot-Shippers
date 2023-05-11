@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerLauncher : MonoBehaviour
 {
     public GameManager status;
-    public GameObject cannon;
+    public GameObject cannonArea;
+    public GameObject cannonBody;
     public GameObject arrowPrefab;
     public GameObject arrow;
 
@@ -18,6 +19,7 @@ public class PlayerLauncher : MonoBehaviour
     public float maxArrowDistance = 40f;
     public float velocityScale = 1f;
     public Rigidbody rb;
+    public Rigidbody rbCannon;
     private Vector3 mouseStartPosition;
 
     // Start is called before the first frame update
@@ -25,7 +27,11 @@ public class PlayerLauncher : MonoBehaviour
     {
         status = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody>();
+        rbCannon = cannonBody.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezePosition;
+        rbCannon.constraints = RigidbodyConstraints.FreezePosition;
+
+        Physics.IgnoreCollision(cannonBody.GetComponent<Collider>(), GetComponent<Collider>());
     }
 
     // Update is called once per frame
@@ -47,6 +53,7 @@ public class PlayerLauncher : MonoBehaviour
                 arrow.transform.position = GetComponent<Renderer>().bounds.center + (Vector3.Normalize(direction) * (length / 4) * arrowScaleFactor * velocity);
                 arrow.transform.right = direction;
                 transform.right = new Vector3(direction.x, direction.y, 0);
+                cannonBody.transform.right = direction;
 
                 float distance = Mathf.Min(velocity, maxArrowDistance);
                 arrow.transform.localScale = new Vector3(distance * arrowScaleFactor, 10f, 1f);
@@ -56,7 +63,7 @@ public class PlayerLauncher : MonoBehaviour
                 if (!isAiming) {
                     isAiming = true;
 
-                    arrow = Instantiate(arrowPrefab, cannon.transform.position, Quaternion.identity);
+                    arrow = Instantiate(arrowPrefab, cannonArea.transform.position, Quaternion.identity);
                 } else {
                     // Player clicks again to launch the object
                     isAiming = false;
