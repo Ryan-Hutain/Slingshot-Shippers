@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerControls : MonoBehaviour
     public GameObject obj;
     public GameObject booster;
     public GameObject flames;
+    public Slider fuelBar;
     public Rigidbody rb;
     public Vector2 speed = new Vector2(50, 50);
     public Vector3 movement;
@@ -26,6 +28,8 @@ public class PlayerControls : MonoBehaviour
         status = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         rb = obj.GetComponent<Rigidbody>();
         fuelText.text = $"Fuel Level: {fuelLevel.ToString()}";
+        fuelBar.maxValue = fuelLevel;
+        fuelBar.value = fuelLevel;
 
         float turnStep = turnSpeed * Time.deltaTime;
         flames.SetActive(false);
@@ -35,6 +39,7 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
         flames.SetActive(false);
+        fuelBar.value = fuelLevel;
 
         if (status.isRunning == true && fuelLevel > 0) {
             inputX = Input.GetAxisRaw("Horizontal");

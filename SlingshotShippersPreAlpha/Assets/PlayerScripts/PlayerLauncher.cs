@@ -47,6 +47,9 @@ public class PlayerLauncher : MonoBehaviour
         }
         float velocity = direction.magnitude * velocityScale;
 
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
         if (status.isRunning == true) {
             if (isAiming && !hasLaunched) {
                 float length = GetComponent<Renderer>().bounds.size.magnitude;
@@ -64,6 +67,17 @@ public class PlayerLauncher : MonoBehaviour
                     isAiming = true;
 
                     arrow = Instantiate(arrowPrefab, cannonArea.transform.position, Quaternion.identity);
+                } else if (Physics.Raycast(ray, out hit)) {
+                    if (hit.collider == GetComponent<Collider>() ||
+                        hit.collider == cannonArea.GetComponent<Collider>() ||
+                        hit.collider == cannonBody.GetComponent<Collider>()) {
+                        isAiming = false;
+                        status.isRunning = false;
+
+                        if (GameObject.Find("Arrow(Clone)") != null) {
+                            Destroy(arrow);
+                        }
+                    }
                 } else {
                     // Player clicks again to launch the object
                     isAiming = false;
@@ -79,20 +93,4 @@ public class PlayerLauncher : MonoBehaviour
             }
         }
     }
-
-    /*
-    private bool DragDetector() {
-        if (Input.GetMouseButtonDown(0)) {
-            mouseStartPosition = Input.mousePosition;
-        }
-        if (Input.GetMouseButtonUp(0)) {
-            return false;
-        }
-
-        if (Input.GetMouseButton(0) && (Input.mousePosition - mouseStartPosition).magnitude > 5) {
-            return true;
-        }
-        return false;
-    }
-    */
 }
