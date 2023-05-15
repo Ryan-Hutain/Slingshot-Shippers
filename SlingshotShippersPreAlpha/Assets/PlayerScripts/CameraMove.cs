@@ -15,6 +15,10 @@ public class CameraMove : MonoBehaviour
     public Vector3 canvasInitPos;
     float canvasH;
     float canvasW;
+    public float minX;
+    public float maxX;
+    public float minY;
+    public float maxY;
 
     [Header("Zooming")]
     public Camera cam;
@@ -32,12 +36,17 @@ public class CameraMove : MonoBehaviour
         canvasInitPos = canvas.GetComponent<RectTransform>().position;
         canvasH = canvas.GetComponent<RectTransform>().rect.height;
         canvasW = canvas.GetComponent<RectTransform>().rect.width;
+
+        minX = canvasInitPos.x - (canvasW / 2);
+        maxX = canvasInitPos.x + (canvasW / 2);
+        minY = canvasInitPos.y - (canvasH / 2);
+        maxY = canvasInitPos.y + (canvasH / 2);
     }
     void Update()
     {
         // Panning
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, canvasInitPos.x - (canvasW / 2), canvasInitPos.x + (canvasW / 2)), 
-                                         Mathf.Clamp(transform.position.y, canvasInitPos.y - (canvasH / 2), canvasInitPos.y + (canvasH / 2)), 
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), 
+                                         Mathf.Clamp(transform.position.y, minY, maxY), 
                                          -10);
 
         if (Input.GetMouseButton(0)) {

@@ -1906,6 +1906,10 @@ MonoBehaviour:
   positionY: 0
   timeManip: {fileID: 1795572078}
   canvasInitPos: {x: 0, y: 0, z: 0}
+  minX: 0
+  maxX: 0
+  minY: 0
+  maxY: 0
   cam: {fileID: 519420031}
   zoomSpeed: 5
   targetZoom: 0
@@ -3051,6 +3055,10 @@ MonoBehaviour:
   rb: {fileID: 0}
   winScreen: {fileID: 202624656}
   loseScreen: {fileID: 1406232549}
+  player: {fileID: 1550672140}
+  fuel: 0
+  cam: {fileID: 519420031}
+  limit: 2
 --- !u!1 &833265307
 GameObject:
   m_ObjectHideFlags: 0
@@ -5947,7 +5955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4304943308613223349, guid: 10e8687ecf3254f4f9ec4c4e2459dabf, type: 3}
       propertyPath: m_Constraints
-      value: 72
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4304943308613223349, guid: 10e8687ecf3254f4f9ec4c4e2459dabf, type: 3}
       propertyPath: m_IsKinematic
