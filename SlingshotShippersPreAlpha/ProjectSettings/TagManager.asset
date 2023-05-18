@@ -16,6 +16,8 @@ TagManager:
   - Asteroid
   - Undefined
   - Pause
+  - LevelData
+  - MainMenu
   layers:
   - Default
   - TransparentFX
