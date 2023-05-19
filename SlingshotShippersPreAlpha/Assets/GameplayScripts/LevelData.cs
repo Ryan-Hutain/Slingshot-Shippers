@@ -32,29 +32,34 @@ public class LevelData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         string statusString = "";
         foreach (KeyValuePair<string, bool> kvp in levelStatus) {
             statusString += ($"Name = {kvp.Key}, Status = {kvp.Value} \n");
             //Debug.Log($"Name = {kvp.Key}, Status = {kvp.Value} \n");
         }
         Debug.Log(statusString);
+        */
 
         string currentScene = SceneManager.GetActiveScene().name;
-        if (currentScene == "LevelsMenu") {
+        if (currentScene == "LevelsMenu")
+        {
             Button[] levelButtons = FindObjectsOfType<Button>();
-            foreach (Button button in levelButtons)
-            {
+            for (int i = 0; i < levelButtons.Length; i++) {
+                Button button = levelButtons[i];
                 string buttonSceneName = button.name; // Assuming the button name matches the scene name
                 bool isUnlocked = false;
-                Debug.Log(buttonSceneName);
-                if (levelStatus.ContainsKey(buttonSceneName))
-                {
+                if (levelStatus.ContainsKey(buttonSceneName)) {
                     isUnlocked = levelStatus[buttonSceneName];
                 }
-                button.interactable = isUnlocked;
-                levelButtons[0].interactable = true;
-                if (button.CompareTag("MainMenu")) {
+                if (button.CompareTag("MainMenu") || button.CompareTag("FirstLevel")) {
                     button.interactable = true;
+                } else {
+                    button.interactable = isUnlocked;
+                    if (isUnlocked) {
+                        levelButtons[i+1].interactable = true;
+                        i++;
+                    }
                 }
             }
         }

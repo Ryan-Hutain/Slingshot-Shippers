@@ -18,6 +18,7 @@ TagManager:
   - Pause
   - LevelData
   - MainMenu
+  - FirstLevel
   layers:
   - Default
   - TransparentFX

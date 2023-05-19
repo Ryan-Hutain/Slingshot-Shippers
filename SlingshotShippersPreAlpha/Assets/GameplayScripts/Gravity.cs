@@ -103,7 +103,7 @@ public class Gravity : MonoBehaviour
                 if (circleOrbit && !hasCollided) {
                     Orbit(body2);
                 } else {
-                    F = (G * rb1.mass * rb2.mass * Vector3.Normalize(pos_vec)) / (Mathf.Pow(r,2f));
+                    F = (G * rb1.mass * rb2.mass * Vector3.Normalize(pos_vec));// / (Mathf.Pow(r,2f));
                 }
             } else {
                 F = new Vector3(0f,0f,0f);
