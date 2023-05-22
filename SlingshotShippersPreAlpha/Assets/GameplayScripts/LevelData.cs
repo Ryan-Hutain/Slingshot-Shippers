@@ -10,7 +10,11 @@ public class LevelData : MonoBehaviour
     [SerializeField] private int startIndex = 3; // Starts logging completion at tutorial
 
     void Awake() {
-        DontDestroyOnLoad(this.gameObject);
+        if (GameObject.Find("LevelData")) {
+            DontDestroyOnLoad(this.gameObject);
+        } else {
+            //Destroy(this.GameObject);
+        }
     }
 
     // Start is called before the first frame update
