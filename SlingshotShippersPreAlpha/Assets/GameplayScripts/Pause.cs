@@ -9,8 +9,8 @@ public class Pause : MonoBehaviour
     public GameObject pauseMenu;
     public TextMeshProUGUI symbol;
     public bool isPaused = false;
-    private string pause = "\u25A1";
-    private string play = "\u25A1";
+    private string pause = "||";
+    private string play = "\u25BA";
 
     void Start() {
         pauseMenu.SetActive(false);

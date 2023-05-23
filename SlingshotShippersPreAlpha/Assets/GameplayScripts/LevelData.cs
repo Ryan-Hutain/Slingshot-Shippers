@@ -13,7 +13,7 @@ public class LevelData : MonoBehaviour
         if (GameObject.Find("LevelData")) {
             DontDestroyOnLoad(this.gameObject);
         } else {
-            //Destroy(this.GameObject);
+            Destroy(this);
         }
     }
 
