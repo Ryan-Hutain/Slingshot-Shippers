@@ -81,7 +81,7 @@ public class Gravity : MonoBehaviour
 
             switch (body1.tag) {
                 case "Node":
-                    grav_rad = 25;
+                    grav_rad = 40;
                     break;
                 case "Asteroid":
                     grav_rad = 50;

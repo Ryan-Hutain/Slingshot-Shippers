@@ -9,6 +9,7 @@ public class EndGame : MonoBehaviour
     public Rigidbody rb;
     public GameObject winScreen;
     public GameObject loseScreen;
+    public bool hasLost;
 
     public GameObject player;
     public int fuel;
@@ -22,8 +23,8 @@ public class EndGame : MonoBehaviour
     float topY;
 
     private Vector3 initialPosition;
-    public float distanceThreshold = 25f; // Adjust this value as needed
-    public float duration = 10f; // Adjust this value as needed
+    public float distanceThreshold = 25f;
+    public float duration = 10f;
     private float elapsedTime = 0f;
     private bool isStationary = false;
 
@@ -65,12 +66,12 @@ public class EndGame : MonoBehaviour
                 initialPosition = player.transform.position;
             }
 
-
             if ((fuel == 0 && isStationary) || 
                 (player.transform.position.x < leftX || player.transform.position.x > rightX || player.transform.position.y < botY || player.transform.position.y > topY)) {
                 status.isRunning = false;
 
                 loseScreen.SetActive(true);
+                hasLost = true;
             }
         }
     }
@@ -78,7 +79,7 @@ public class EndGame : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         status.isRunning = false;
 
-        if (other.CompareTag("Player")) {
+        if (other.CompareTag("Player") && !hasLost) {
             rb = other.GetComponent<Rigidbody>();
             rb.velocity = new Vector3(0f,0f,0f);
             winScreen.SetActive(true);
