@@ -15,13 +15,13 @@ public class Gravity : MonoBehaviour
 
     public bool circleOrbit;
     public bool hasCollided = false;
-    public float rotationSpeed = 10f;
+    public float theta = 0f;
+    public float orbitSpeed = 1f;
 
     public Vector3 pos_vec;
     public float r;
     public float grav_rad;
     public Vector3 F;
-    public float v_circle;
 
     public float G = 6.67e-11f;
 
@@ -75,7 +75,7 @@ public class Gravity : MonoBehaviour
     }
 
     public void GravCalc(GameObject body1, GameObject body2, bool circleOrbit) {
-        if (status.isRunning) {
+        //if (status.isRunning) {
             rb1 = body1.GetComponent<Rigidbody>();
             rb2 = body2.GetComponent<Rigidbody>();
 
@@ -99,9 +99,9 @@ public class Gravity : MonoBehaviour
             pos_vec = body1Pos - body2Pos;
             r = Vector3.Magnitude(pos_vec);
             
-            if (Vector3.Magnitude(pos_vec) <= grav_rad) {
+            if (r <= grav_rad) {
                 if (circleOrbit && !hasCollided) {
-                    Orbit(body2);
+                    Orbit(body1, body2);
                 } else {
                     F = (G * rb1.mass * rb2.mass * Vector3.Normalize(pos_vec));// / (Mathf.Pow(r,2f));
                 }
@@ -111,20 +111,22 @@ public class Gravity : MonoBehaviour
 
             rb1.AddForce(-F, ForceMode.Acceleration);
             rb2.AddForce(F, ForceMode.Acceleration);
-        }
+        //}
     }
 
     void OnCollisionEnter(Collision collision) {
         hasCollided = true;
     }
 
-    void Orbit(GameObject body2) {
-        v_circle = Mathf.Sqrt((G * rb1.mass) / r) * (r * 5);
-        rb2.velocity = v_circle * Vector3.Normalize(new Vector3(-pos_vec.y, pos_vec.x, 0));
+    void Orbit(GameObject body1, GameObject body2) {
+        if (theta < 360) {
+            theta += orbitSpeed * Time.deltaTime;
+        } else {
+            theta = 0;
+        }
 
-        float T = Mathf.Sqrt(Mathf.Pow(r,3) / (G * rb1.mass));
-        body2.transform.RotateAround(body1Pos, new Vector3(0,0,1), 360 / (-T * Time.deltaTime * 100));
-
-        //Debug.Log($"Time: {Time.realtimeSinceStartup}\nDistance: {r}");
+        body2.transform.position = body1.transform.position + new Vector3(r * Mathf.Cos(theta), r * Mathf.Sin(theta), 0);
+        body2.transform.right = new Vector3(pos_vec.y, -pos_vec.x, 0);
+        rb2.velocity = Vector3.Normalize(new Vector3(pos_vec.y, -pos_vec.x, 0)) * orbitSpeed;
     }
 }

@@ -15,13 +15,10 @@ public class MenuManager : MonoBehaviour
         GroundLevel2 = 5,
         GroundLevel3 = 6,
         GroundLevel4 = 7,
-        GroundLevel5 = 8,
-        GroundLevel6 = 9,
-        GroundLevel7 = 10,
-        GroundLevel8 = 11,
-        GroundLevel9 = 12,
-        GroundLevel10 = 13,
-        SpaceLevel1 = 14
+        SpaceLevel1 = 8,
+        SpaceLevel2 = 9,
+        SpaceLevel3 = 10,
+        SpaceLevel4 = 11
     }
 
     public SceneEnum targetScene;

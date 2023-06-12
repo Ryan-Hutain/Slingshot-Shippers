@@ -89,7 +89,7 @@ public class PlayerLauncher : MonoBehaviour
                     
                     rb.constraints = RigidbodyConstraints.None;
                     rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-                    rb.AddForce(direction.normalized * (5e2f * velocity), ForceMode.Acceleration);
+                    rb.velocity = direction.normalized * (15f * velocity);
                 }
             }
         }
